@@ -6,6 +6,11 @@
         "laravel/framework": "5.3.*",
         "guzzlehttp/guzzle": "^6.2"
     },
+    "autoload": {
+        "psr-4": {
+            "Lightmedia\\Googleprint\\": "src"
+        }
+    },
     "authors": [
         {
             "name": "Mark van der Feijst",
