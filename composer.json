@@ -1,5 +1,5 @@
 {
-    "name": "lightmedianl/googleprint",
+    "name": "lightmedia/googleprint",
     "description": "Api connection to Google cloud print for Laravel",
     "require": {
         "php": "^5.5",
