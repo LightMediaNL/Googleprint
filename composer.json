@@ -1,0 +1,16 @@
+{
+    "name": "lightmedianl/googleprint",
+    "description": "Api connection to Google cloud print for Laravel",
+    "require": {
+        "php": "^5.5",
+        "laravel/framework": "5.3.*",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "Mark van der Feijst",
+            "email": "mark@lightmedia.nl"
+        }
+    ],
+    "minimum-stability": "dev"
+}
