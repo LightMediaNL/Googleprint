@@ -1,9 +1,9 @@
 <?php
-namespace Lightmedianl\Googleprint\Models;
+namespace Lightmedia\Googleprint\Models;
 
 use View;
-use Lightmedianl\Googleprint\Builders\QueryBuilder;
-use Lightmedianl\Googleprint\Exceptions\GooglePrintException;
+use Lightmedia\Googleprint\Builders\ConnectionBuilder;
+use Lightmedia\Googleprint\Exceptions\GooglePrintException;
 
 class PrintJob {
 
@@ -31,7 +31,7 @@ class PrintJob {
             'contentType' => $this->getContentType(),
         ];
 
-        $request = new QueryBuilder();
+        $request = new ConnectionBuilder;
         $response = $request->submit($params);
 
         $this->assign($response['job']);
@@ -104,6 +104,8 @@ class PrintJob {
     public function printer(Printer &$printer) {
 
         $this->printer = &$printer;
+
+        return $this;
     }
 
     public function view($view, $variables = [ ]) {

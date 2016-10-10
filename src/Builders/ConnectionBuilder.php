@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\BadResponseException;
 use Lightmedia\Googleprint\Cache\GooglePrintCache;
 use Lightmedia\Googleprint\Exceptions\GooglePrintException;
 
-class QueryBuilder {
+class ConnectionBuilder {
 
     protected $accessToken;
     protected $values;
@@ -75,6 +75,15 @@ class QueryBuilder {
         return $result;
     }
 
+    public function printer(array $array) {
+
+        $this->values = $array;
+
+        $result = $this->request(self::BASE_URL . '/printer');
+
+        return $result;
+    }
+
     protected function removeEmptyValues() {
 
         foreach($this->values as $key => $value) {
@@ -115,7 +124,7 @@ class QueryBuilder {
 
         if(true !== $response['success']){
 
-            throw new GooglePrintException('Error in Google API request: ' . $response['message']);
+            throw new GooglePrintException('Error in Google API request: ' . $response['message'] . ' in ' . $url);
         }
         
         return $response;
