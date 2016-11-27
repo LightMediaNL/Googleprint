@@ -119,7 +119,7 @@ class PrinterBuilder {
 
     public function get() {
 
-        $search = new QueryBuilder($this->accessToken);
+        $search   = new ConnectionBuilder($this->accessToken);
         $response = $search->search($this->values);
 
 
@@ -134,20 +134,40 @@ class PrinterBuilder {
 
     protected function buildObjects(Array $array) {
 
-        $return = [];
+        $return = [ ];
 
-        $hide = config('print.printers.hide') ?: [];
+        $hide = config('print.printers.hide') ?: [ ];
 
         foreach($array as $item) {
 
-            if(false === in_array($item['id'], $hide)){
+            if(false === in_array($item['id'], $hide)) {
 
-                $object = new Printer($this->accessToken, $item['id']);
+                $object   = new Printer($item['id']);
                 $return[] = $object->assign($item);
             }
 
         }
 
         return collect($return);
+    }
+
+    public function find($id) {
+
+        $params = [
+            'printerid'    => $id,
+            'extra_fields' => 'connectionStatus,semanticState,uiState',
+        ];
+
+        $search   = new ConnectionBuilder;
+        $response = $search->printer($params);
+
+        if(count($response['printers']) !== 1){
+            throw new GooglePrintException('Unable to find printer');
+        }
+
+        $object = new Printer;
+        $object->assign($response['printers'][0]);
+
+        return $object;
     }
 }

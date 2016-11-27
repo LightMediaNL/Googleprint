@@ -2,7 +2,6 @@
 namespace Lightmedia\Googleprint\Cache;
 
 use Cache;
-use Lightmedia\Googleprint\Builders\QueryBuilder;
 
 class GooglePrintCache extends Cache {
 
@@ -20,8 +19,6 @@ class GooglePrintCache extends Cache {
 
     protected static function cache() {
         
-        $request = new QueryBuilder;
-
         return Cache::store(config('print.cache.driver'));
     }
 }
