@@ -23,6 +23,6 @@ class GoogleprintServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('Googleprint', 'LightMedia\Googleprint\Googleprint' );
     }
 }

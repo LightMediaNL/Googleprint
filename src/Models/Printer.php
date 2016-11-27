@@ -2,6 +2,7 @@
 namespace Lightmedia\Googleprint\Models;
 
 use Lightmedia\Googleprint\Exceptions\GooglePrintException;
+use Lightmedia\Googleprint\Models\PrintJob;
 
 class Printer extends BaseObject{
 
@@ -22,12 +23,11 @@ class Printer extends BaseObject{
 
     }
 
-    public function submit() {
+    public function submit(PrintJob $job) {
 
         $this->canPrint();
 
-
-
+        return $job->printer($this)->save();
     }
 
     protected function getStatusAttribute() {
@@ -74,13 +74,7 @@ class Printer extends BaseObject{
             return null;
         }
     }
-
-    protected function getIdAttribute() {
-
-        return strtolower($this->id);
-    }
-
-
+    
     protected function canPrint() {
 
         if(true === $this->values['isTosAccepted']) {
